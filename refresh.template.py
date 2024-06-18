@@ -1235,7 +1235,6 @@ def _get_commands(target: str, flags: str):
         aquery_args += ['--host_features=-compiler_param_file', '--host_features=-layering_check']
 
     aquery_args += additional_flags
-    log_info(aquery_args)
 
     aquery_process = subprocess.run(
         aquery_args,
@@ -1264,7 +1263,6 @@ def _get_commands(target: str, flags: str):
         log_warning(f">>> Failed extracting commands for {target}\n    Continuing gracefully...")
         return
 
-    log_info(parsed_aquery_output)
     if not getattr(parsed_aquery_output, 'actions', None): # Unifies cases: No actions (or actions list is empty)
         if aquery_process.stderr:
             log_warning(f""">>> Bazel lists no applicable compile commands for {target}, probably because of errors in your BUILD files, printed above.
